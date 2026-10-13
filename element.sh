@@ -9,7 +9,7 @@ if [[ $1 =~ ^[0-9]+$ ]]
 then
   ELEMENT=$(psql -U freecodecamp -d periodic_table -tA -c "SELECT e.atomic_number, e.name, e.symbol, t.type, p.atomic_mass, p.melting_point_celsius, p.boiling_point_celsius FROM elements e JOIN properties p USING(atomic_number) JOIN types t USING(type_id) WHERE e.atomic_number = $1;")
 else
-  ELEMENT=$(psql -U freecodecamp -d periodic_table -t -c "SELECT e.atomic_number, e.name, e.symbol, t.type, p.atomic_mass, p.melting_point_celsius, p.boiling_point_celsius FROM elements e JOIN properties p USING(atomic_number) JOIN types t USING(type_id) WHERE e.symbol = '$1' OR e.name = '$1';")
+  ELEMENT=$(psql -U freecodecamp -d periodic_table -tA -c "SELECT e.atomic_number, e.name, e.symbol, t.type, p.atomic_mass, p.melting_point_celsius, p.boiling_point_celsius FROM elements e JOIN properties p USING(atomic_number) JOIN types t USING(type_id) WHERE e.symbol = '$1' OR e.name = '$1';")
 fi
 if [[ -z $ELEMENT ]]
 then
